@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useReducer, useState } from 'react';
+import { useEffect, useRef, useReducer, useState } from 'react';
 
 /* ============================================================
    Constellation - drifting white dots + faint links, spanning
@@ -1174,6 +1174,36 @@ const laAssets = {
   wireTwo: './assets/la-fitness/wireframes-slide-2.png'
 };
 
+
+const doterraAssets = {
+  overview: './assets/doterra/doterra-overview.png',
+  rationales: './assets/doterra/doterra-rationales.png',
+  results: './assets/doterra/doterra-results.png',
+  heroScreens: './assets/doterra/doterra-hero-screens.png',
+  iphoneFrame: './assets/doterra/iphone-frame.png',
+  feedPdf: './assets/doterra/old-feed-usage-guide.pdf',
+  oilsPdf: './assets/doterra/old-oils-recipes-charts.pdf'
+};
+
+const doterraOldScreens = [
+  './assets/doterra/old-app/old-splash.png',
+  './assets/doterra/old-app/old-onboarding.png',
+  './assets/doterra/old-app/old-login.png',
+  './assets/doterra/old-app/old-signup.png',
+  './assets/doterra/old-app/old-oils.png',
+  './assets/doterra/old-app/old-abdominal-rub.png',
+  './assets/doterra/old-app/old-aromatouch.png'
+];
+
+const doterraRedesignScreens = [
+  './assets/doterra/redesign/redesign-01.png',
+  './assets/doterra/redesign/redesign-02.png',
+  './assets/doterra/redesign/redesign-03.png',
+  './assets/doterra/redesign/redesign-04.png',
+  './assets/doterra/redesign/redesign-05.png',
+  './assets/doterra/redesign/redesign-07.png',
+  './assets/doterra/redesign/redesign-06.png'
+];
 function CaseImage({ src, alt, style }) {
   return (
     <img
@@ -1401,6 +1431,164 @@ function LAFitnessCaseStudy({ mono, display }) {
   );
 }
 
+
+function DoterraPhoneCompare({ mono, display, oldScreens, redesignScreens }) {
+  const [index, setIndex] = useState(0);
+  const total = Math.max(oldScreens.length, redesignScreens.length);
+  const go = (dir) => setIndex((index + dir + total) % total);
+  const oldSrc = oldScreens[index % oldScreens.length];
+  const redesignSrc = redesignScreens[index % redesignScreens.length];
+  const phoneWrap = {
+    width: 'min(330px, 37vw)',
+    aspectRatio: '407 / 749',
+    position: 'relative',
+    filter: 'drop-shadow(0 28px 46px rgba(0,0,0,.45))'
+  };
+  const screenWrap = {
+    position: 'absolute',
+    left: '13.7%',
+    top: '9.15%',
+    width: '72.8%',
+    height: '81.7%',
+    borderRadius: '6.8% / 3.6%',
+    overflow: 'hidden',
+    background: '#fff',
+    zIndex: 1
+  };
+  const labelStyle = {
+    fontFamily: mono,
+    fontSize: 12,
+    letterSpacing: '.16em',
+    textTransform: 'uppercase',
+    color: '#EDEDF2',
+    textAlign: 'center',
+    marginBottom: 16
+  };
+
+  const Phone = ({ label, src }) => (
+    <div style={{ display: 'grid', justifyItems: 'center' }}>
+      <div style={labelStyle}>{label}</div>
+      <div style={phoneWrap}>
+        <div style={screenWrap}>
+          <img key={src} src={src} alt={`${label} screen ${index + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', animation: 'kc-phone-fade 180ms ease both' }} />
+        </div>
+        <img src={doterraAssets.iphoneFrame} alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', pointerEvents: 'none', zIndex: 2 }} />
+      </div>
+    </div>
+  );
+
+  return (
+    <section style={{ padding: '54px 0', margin: '0 auto', maxWidth: 1240 }}>
+      <div style={{ margin: '0 auto 42px', maxWidth: 860, textAlign: 'center' }}>
+        <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.16em', textTransform: 'uppercase', color: '#B66AD8', marginBottom: 12 }}>screen comparison</div>
+        <h2 style={{ fontFamily: display, fontSize: 40, lineHeight: 1.05, margin: '0 0 14px', color: '#FBFBFE' }}>A direct look at the old app beside the redesign.</h2>
+        <p style={{ color: '#A8A8B2', lineHeight: 1.7, margin: 0 }}>Tap through matching moments from the original experience and the refreshed direction to see how the visual system, hierarchy, and core interactions changed screen by screen.</p>
+      </div>
+      <div className="kc-doterra-comparison" style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: 30, alignItems: 'center' }}>
+        <Phone label="Old App" src={oldSrc} />
+        <div className="kc-doterra-controls" style={{ display: 'grid', justifyItems: 'center', gap: 18, alignSelf: 'center' }}>
+          <button aria-label="Previous comparison screen" onClick={() => go(-1)} style={{ width: 48, height: 48, borderRadius: 999, border: '1px solid rgba(255,255,255,.14)', background: 'rgba(255,255,255,.06)', color: '#EDEDF2', fontSize: 30, lineHeight: 1, cursor: 'pointer' }}>‹</button>
+          <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.14em', color: '#9A9AA5', writingMode: 'vertical-rl', textTransform: 'uppercase' }}>tap to compare</div>
+          <button aria-label="Next comparison screen" onClick={() => go(1)} style={{ width: 48, height: 48, borderRadius: 999, border: '1px solid rgba(255,255,255,.14)', background: 'rgba(182,106,216,.18)', color: '#FFFFFF', fontSize: 30, lineHeight: 1, cursor: 'pointer' }}>›</button>
+          <div style={{ fontFamily: mono, fontSize: 11, color: '#777784', letterSpacing: '.1em' }}>{index + 1} / {total}</div>
+        </div>
+        <Phone label="Redesign" src={redesignSrc} />
+      </div>
+      <style>{`
+        @keyframes kc-phone-fade {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @media (max-width: 760px) {
+          .kc-doterra-comparison { grid-template-columns: 1fr !important; }
+          .kc-doterra-controls { grid-row: 2; display: flex !important; justify-content: center; align-items: center; }
+          .kc-doterra-controls div:nth-child(2) { writing-mode: horizontal-tb !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+function DoterraCaseStudy({ mono, display }) {
+  const muted = '#A8A8B2';
+  const purple = '#B66AD8';
+  const panel = { background: 'rgba(13,13,18,.72)', border: '1px solid rgba(255,255,255,.08)', borderRadius: 18, backdropFilter: 'blur(10px)' };
+  const label = { fontFamily: mono, fontSize: 11, letterSpacing: '.16em', textTransform: 'uppercase', color: purple };
+  const panelImage = {
+    borderRadius: 0,
+    boxShadow: 'none',
+    margin: 0
+  };
+
+  return (
+    <main style={{ padding: '22px 32px 90px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontFamily: mono, marginBottom: 54 }}>
+        <a href="/" style={{ fontSize: 13, fontWeight: 500, letterSpacing: '.02em', color: '#EDEDF2' }}>~/kevinconnolly</a>
+        <nav className="kc-nav" style={{ display: 'flex', gap: 22 }}>
+          {[
+            ['work', '/#work'],
+            ['about', '/#about'],
+            ['AI Lab', '/ai']
+          ].map(([t, href], i) => (
+            <a key={i} href={href} style={{ fontSize: 12, color: '#9A9AA5', letterSpacing: '.04em' }}>{t}</a>
+          ))}
+        </nav>
+      </div>
+
+      <section style={{ maxWidth: 1440, margin: '0 auto', display: 'grid', gap: 0 }}>
+        <section className="kc-case-grid" style={{ display: 'grid', gridTemplateColumns: '1.05fr .95fr', gap: 34, alignItems: 'end', marginBottom: 34 }}>
+          <div>
+            <div style={label}>case study</div>
+            <h1 className="kc-case-title" style={{ fontFamily: display, fontSize: 72, lineHeight: 1.02, letterSpacing: '-.01em', margin: '14px 0 18px', color: '#FBFBFE' }}>
+              doTERRA Essential Oils App Redesign
+            </h1>
+            <p style={{ fontSize: 17, lineHeight: 1.65, color: '#C8C8D0', maxWidth: 660, margin: 0 }}>
+              A high-fidelity mobile redesign for an essential oils app, focused on creating a fresher, more engaging experience while keeping the product useful for a broad age range.
+            </p>
+          </div>
+          <div style={{ ...panel, padding: 20 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              {[
+                ['Role', 'UI design, visual direction, UX rationale'],
+                ['Focus', 'Essential oils guide app'],
+                ['Tools', 'Figma, app audit, high-fidelity design'],
+                ['Outcome', 'Modernized app concept and launch assets']
+              ].map(([k, v]) => (
+                <div key={k}>
+                  <div style={{ ...label, fontSize: 10, color: '#7CF0C0', marginBottom: 6 }}>{k}</div>
+                  <div style={{ color: '#EDEDF2', fontSize: 14, lineHeight: 1.45 }}>{v}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div style={{ aspectRatio: '2496 / 1209', overflow: 'hidden', borderRadius: 24, background: 'radial-gradient(circle at 18% 24%, rgba(226,88,190,.18), transparent 34%), radial-gradient(circle at 20% 22%, rgba(118,74,255,.30), transparent 36%), radial-gradient(circle at 82% 28%, rgba(137,83,255,.42), transparent 42%), linear-gradient(135deg,#160B2E,#5B2489 52%,#0D061C)', border: '1px solid rgba(255,255,255,.12)', boxShadow: '0 30px 90px rgba(0,0,0,.48)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <img src={doterraAssets.heroScreens} alt="doTERRA redesign screens arranged across a purple-pink brand background" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        </div>
+
+        <DoterraPhoneCompare
+          mono={mono}
+          display={display}
+          oldScreens={doterraOldScreens}
+          redesignScreens={doterraRedesignScreens}
+        />
+
+        <CaseImage
+          src={doterraAssets.rationales}
+          alt="doTERRA design rationale section showing app screen annotations, color palette, and interaction decisions"
+          style={{ ...panelImage, marginBottom: 54 }}
+        />
+
+        <CaseImage
+          src={doterraAssets.results}
+          alt="doTERRA results section showing App Store listing and reviews"
+          style={panelImage}
+        />
+      </section>
+    </main>
+  );
+}
 export default function KconPortfolio() {
   const mono = "'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace";
   const sans = "'Geist', system-ui, sans-serif";
@@ -1409,6 +1597,7 @@ export default function KconPortfolio() {
     const hash = window.location.hash;
     const path = window.location.pathname;
     if (hash === '#la-fitness' || path === '/la-fitness') return '#la-fitness';
+    if (hash === '#doterra' || path === '/doterra') return '#doterra';
     if (hash === '#work' || hash === '#about' || hash === '#contact') return '/';
     if (path === '/ai') return '/ai';
     return '/';
@@ -1419,7 +1608,7 @@ export default function KconPortfolio() {
     const onRouteChange = () => {
       const nextRoute = getRoute();
       setRoute(nextRoute);
-      if (nextRoute === '#la-fitness' || nextRoute === '/ai') {
+      if (nextRoute === '#la-fitness' || nextRoute === '#doterra' || nextRoute === '/ai') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     };
@@ -1514,6 +1703,8 @@ export default function KconPortfolio() {
         <div style={{ maxWidth: 1080, margin: '0 auto', width: '100%' }}>
         {route === '#la-fitness' || route === '/la-fitness' ? (
           <LAFitnessCaseStudy mono={mono} display={display} />
+        ) : route === '#doterra' || route === '/doterra' ? (
+          <DoterraCaseStudy mono={mono} display={display} />
         ) : (
         <>
         {/* nav */}
@@ -1538,7 +1729,7 @@ export default function KconPortfolio() {
           </div>
           <div style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.3em', textTransform: 'uppercase', color: '#C9C2E8', marginBottom: 22 }}>❯ whoami</div>
           <h1 style={{ fontFamily: display, fontWeight: 600, fontSize: 76, lineHeight: 1.08, letterSpacing: '-.01em', margin: '0 0 22px', color: '#FBFBFE', textShadow: '0 2px 60px rgba(0,0,0,.7)' }}>
-            Part designer, part<br /><span className="kc-grad">AI whisperer,</span> all craft.
+            Part designer<br /><span className="kc-grad">part AI whisperer</span><br />all craft.
           </h1>
           <p style={{ fontSize: 16, color: '#C2C2CE', maxWidth: 440, margin: '0 auto 16px', lineHeight: 1.6 }}>
             I use AI as a creative material — <b style={{ color: '#FBFBFE', fontWeight: 500 }}>not a crutch.</b><br />
@@ -1560,7 +1751,7 @@ export default function KconPortfolio() {
           </div>
           <div className="kc-work-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {orderedWork.map((p, i) => (
-              <a key={i} href={p.title === 'LA Fitness App Redesign' ? '#la-fitness' : '#'} className="kc-card kc-work-card" style={{ gridColumn: p.wide ? 'span 2' : 'auto', display: p.wide ? 'grid' : 'block', gridTemplateColumns: p.wide ? '1fr 1.05fr' : undefined, background: 'rgba(13,13,18,0.72)', backdropFilter: 'blur(8px)', border: '1px solid #1E1E26', borderRadius: 16, color: '#EDEDF2', overflow: 'hidden' }}>
+              <a key={i} href={p.title === 'LA Fitness App Redesign' ? '#la-fitness' : p.title === 'doTERRA Essential Oils App Redesign' ? '#doterra' : p.title === 'Portfolio — Nostalgia Edition' ? 'https://kcon-design.github.io/h3-nostalgia/' : '#'} target={p.title === 'Portfolio — Nostalgia Edition' ? '_blank' : undefined} rel={p.title === 'Portfolio — Nostalgia Edition' ? 'noreferrer' : undefined} className="kc-card kc-work-card" style={{ gridColumn: p.wide ? 'span 2' : 'auto', display: p.wide ? 'grid' : 'block', gridTemplateColumns: p.wide ? '1fr 1.05fr' : undefined, background: 'rgba(13,13,18,0.72)', backdropFilter: 'blur(8px)', border: '1px solid #1E1E26', borderRadius: 16, color: '#EDEDF2', overflow: 'hidden' }}>
                 <div style={{ minHeight: p.wide ? 230 : 180, height: p.wide ? '100%' : 180, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', fontSize: 54, background: p.grad, overflow: 'hidden' }}>
                   <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px)', backgroundSize: '26px 26px' }} />
                   <span style={{ position: 'absolute', top: 13, left: 13, fontFamily: mono, fontSize: 10, fontWeight: 500, background: 'rgba(4,4,7,.7)', color: '#E8E8F0', padding: '4px 10px', borderRadius: 50, border: '1px solid rgba(255,255,255,.12)', letterSpacing: '.04em' }}>{p.tag}</span>
@@ -1603,7 +1794,7 @@ export default function KconPortfolio() {
               I've shipped work for health, fitness, and local business clients — and I'm returning to the field with <b style={{ color: '#EDEDF2', fontWeight: 500 }}>a sharper focus on AI-era design practices.</b>
             </p>
             <p style={{ fontSize: 15, color: '#A8A8B2', lineHeight: 1.7, marginBottom: 14 }}>
-              Beyond design, I channel my dedication into <b style={{ color: '#EDEDF2', fontWeight: 500 }}>bodybuilding</b> and creating fitness content for social media 💪📷. In my free time, I dive into the gaming world, enjoying epic adventures in <b style={{ color: '#EDEDF2', fontWeight: 500 }}>Halo and Sea of Thieves</b> 🎮.
+              Beyond design, I channel my dedication into bodybuilding and creating fitness content for social media. I also run a 3D printing shop and am usually fulfilling orders daily. When I finally have some free time, I dive into the gaming world, enjoying epic adventures in games like Halo, Peak, and Sea of Thieves 🎮.
             </p>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 20 }}>
               {['bodybuilding', 'fitness content', 'gaming', 'dog dad'].map((t, i) => (
@@ -1641,4 +1832,6 @@ export default function KconPortfolio() {
     </div>
   );
 }
+
+
 
