@@ -1460,7 +1460,9 @@ export default function KconPortfolio() {
         .kc-btn-g:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.45) !important; }
         .kc-grad { background: linear-gradient(100deg,#8B7BF5,#7CF0C0,#F079C4); -webkit-background-clip:text; background-clip:text; color:transparent; }
         @keyframes kc-caret { 0%,50%{opacity:1;} 50.01%,100%{opacity:0;} }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; background: #040407; }
+        html, body, #root { margin: 0; min-height: 100%; background: #040407; }
+        body { overflow-x: hidden; }
         a { text-decoration: none; }
         .kc-grain {
           position: fixed; inset: 0; z-index: 60; pointer-events: none;
@@ -1639,3 +1641,4 @@ export default function KconPortfolio() {
     </div>
   );
 }
+
