@@ -1162,6 +1162,15 @@ const orderedWork = workOrder
   .filter(Boolean)
   .map((item) => ({ ...item, wide: featuredWork.has(item.title) }));
 
+const printingAssets = {
+  shopBadge: './assets/printing-castle/etsy-storefront.png',
+  shopPage: './assets/printing-castle/etsy-shop.png',
+  shadowSign: './assets/printing-castle/product-01.jpg',
+  haloOrnament: './assets/printing-castle/product-02.jpg',
+  tigerOrnament: './assets/printing-castle/product-03.jpg',
+  haloLight: './assets/printing-castle/product-04.jpg'
+};
+
 const laAssets = {
   reviews: './assets/la-fitness/app-reviews.png',
   hifiBanner: './assets/la-fitness/hifi-banner.png',
@@ -1253,6 +1262,186 @@ function CaseSlideshow({ label, slides, mono, aspectRatio = '2 / 1', style }) {
   );
 }
 
+function PrintingCastleCaseStudy({ mono, display }) {
+  const muted = '#A8A8B2';
+  const green = '#7CF0C0';
+  const panel = { background: 'rgba(13,13,18,.72)', border: '1px solid rgba(255,255,255,.08)', borderRadius: 18, backdropFilter: 'blur(10px)' };
+  const label = { fontFamily: mono, fontSize: 11, letterSpacing: '.16em', textTransform: 'uppercase', color: green };
+  const Photo = ({ src, alt, style }) => (
+    <img src={src} alt={alt} style={{ width: '100%', display: 'block', borderRadius: 18, objectFit: 'cover', boxShadow: '0 24px 70px rgba(0,0,0,.45)', ...style }} />
+  );
+  const stats = [
+    ['917+', 'Etsy sales'],
+    ['4.9', 'shop rating'],
+    ['$1.5K', 'first month'],
+    ['$22.5K', 'peak month'],
+    ['200+', 'reviews wave']
+  ];
+  const timeline = [
+    ['01', 'The bet', 'Ordered my first Bambu P1S AMS Combo with no 3D printing or modeling experience.'],
+    ['02', 'The first proof', 'Launched a storefront with commercially licensed models and aimed for $100 a week. Month one closed around $1,500.'],
+    ['03', 'Original products', 'Started creating my own models with MakerWorld, Bambu Studio, and AI guidance. The REPO robot became the first big signal.'],
+    ['04', 'The breakout', 'Built LED lightsticks after spotting a pop-culture moment early and moving faster than the market.'],
+    ['05', 'The company', 'Evolved the shop into Printing Castle LLC and expanded into signs, ornaments, room decor, and custom fan creations.']
+  ];
+  const placeholders = ['printer time-lapse GIF', 'packing orders station', 'lightstick power-on demo'];
+
+  return (
+    <main style={{ padding: '22px 32px 90px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontFamily: mono, marginBottom: 54 }}>
+        <a href="/" style={{ fontSize: 13, fontWeight: 500, letterSpacing: '.02em', color: '#EDEDF2' }}>~/kevinconnolly</a>
+        <nav className="kc-nav" style={{ display: 'flex', gap: 22 }}>
+          {[
+            ['work', '/#work'],
+            ['about', '/#about'],
+            ['AI Lab', '/ai']
+          ].map(([t, href], i) => (
+            <a key={i} href={href} style={{ fontSize: 12, color: '#9A9AA5', letterSpacing: '.04em' }}>{t}</a>
+          ))}
+        </nav>
+      </div>
+
+      <section className="kc-case-grid" style={{ display: 'grid', gridTemplateColumns: '1.05fr .95fr', gap: 34, alignItems: 'end', marginBottom: 38 }}>
+        <div>
+          <div style={label}>featured case study</div>
+          <h1 className="kc-case-title" style={{ fontFamily: display, fontSize: 72, lineHeight: 1.02, letterSpacing: '-.01em', margin: '14px 0 18px', color: '#FBFBFE' }}>
+            From first printer to 900+ sales.
+          </h1>
+          <p style={{ fontSize: 17, lineHeight: 1.65, color: '#C8C8D0', maxWidth: 660, margin: 0 }}>
+            A product and entrepreneurship case study about launching Printing Castle, using AI to learn fast, and turning one 3D printer into a shop with real demand, real customers, and real operational pressure.
+          </p>
+        </div>
+        <div style={{ ...panel, padding: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            {[
+              ['Role', 'Founder, maker, product designer, operator'],
+              ['Tools', 'Bambu P1S, Bambu Studio, MakerWorld, ChatGPT'],
+              ['Focus', 'Market timing, rapid prototyping, customer experience'],
+              ['Outcome', '900+ sales, 4.9 rating, Printing Castle LLC']
+            ].map(([k, v]) => (
+              <div key={k}>
+                <div style={{ ...label, fontSize: 10, color: '#8B7BF5', marginBottom: 6 }}>{k}</div>
+                <div style={{ color: '#EDEDF2', fontSize: 14, lineHeight: 1.45 }}>{v}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section style={{ marginBottom: 54, overflow: 'hidden', borderRadius: 24, background: 'radial-gradient(circle at 18% 20%, rgba(124,240,192,.26), transparent 32%), radial-gradient(circle at 82% 16%, rgba(139,123,245,.34), transparent 38%), linear-gradient(135deg,#061A17,#152B28 46%,#0D1020)', border: '1px solid rgba(255,255,255,.12)', boxShadow: '0 30px 90px rgba(0,0,0,.48)' }}>
+        <div className="kc-case-grid" style={{ display: 'grid', gridTemplateColumns: '.85fr 1.15fr', gap: 24, alignItems: 'center', padding: 26 }}>
+          <div style={{ ...panel, padding: 20, background: 'rgba(4,4,7,.58)' }}>
+            <img src={printingAssets.shopBadge} alt="HowlsPrintingCastle Etsy shop summary showing rating, sales, and time on Etsy" style={{ width: '100%', display: 'block', borderRadius: 14, background: '#fff' }} />
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10, marginTop: 14 }}>
+              {stats.slice(0, 4).map(([n, t]) => (
+                <div key={t} style={{ border: '1px solid rgba(255,255,255,.09)', borderRadius: 12, padding: 12, background: 'rgba(255,255,255,.04)' }}>
+                  <div style={{ fontFamily: display, fontSize: 28, color: '#FBFBFE', lineHeight: 1 }}>{n}</div>
+                  <div style={{ fontFamily: mono, fontSize: 10, color: muted, letterSpacing: '.08em', textTransform: 'uppercase', marginTop: 6 }}>{t}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <Photo src={printingAssets.shopPage} alt="Printing Castle Etsy storefront with featured 3D printed products" style={{ height: 430, borderRadius: 18, objectPosition: 'top center' }} />
+        </div>
+      </section>
+
+      <section className="kc-case-grid" style={{ display: 'grid', gridTemplateColumns: '.72fr 1.28fr', gap: 34, marginBottom: 54, alignItems: 'start' }}>
+        <div>
+          <div style={label}>the bet</div>
+          <h2 style={{ fontFamily: display, fontSize: 42, lineHeight: 1.04, margin: '12px 0 0' }}>I wanted to see it through so badly I could not be stopped.</h2>
+        </div>
+        <div style={{ color: muted, fontSize: 16, lineHeight: 1.75 }}>
+          <p style={{ marginTop: 0 }}>For many years, I've been interested in launching my own small business. Last year I took the plunge and ordered my very first 3D printer, the Bambu P1S AMS Combo. I remember consulting friends and family about the purchase and my idea for the Etsy store, and nearly all of them were against it.</p>
+          <p>I actually couldn't even afford to buy it at the time, but with options available like Klarna, I was able to create an opportunity. My payment plan gave me a narrow window, so when the printer arrived, I got to work right away.</p>
+          <p style={{ color: '#EDEDF2', fontFamily: display, fontSize: 28, lineHeight: 1.18, marginBottom: 0 }}>I had no prior experience with 3D printing or 3D modeling, but with a will there is a way. And man, did I find a way.</p>
+        </div>
+      </section>
+
+      <section style={{ display: 'grid', gap: 16, marginBottom: 54 }}>
+        {timeline.map(([num, title, body]) => (
+          <div key={num} className="kc-case-grid" style={{ ...panel, display: 'grid', gridTemplateColumns: '90px 1fr', gap: 18, padding: 20, alignItems: 'center' }}>
+            <div style={{ fontFamily: display, fontSize: 48, color: num === '04' ? '#7CF0C0' : 'rgba(255,255,255,.28)', lineHeight: 1 }}>{num}</div>
+            <div>
+              <h3 style={{ fontFamily: display, fontSize: 26, lineHeight: 1.08, margin: '0 0 8px' }}>{title}</h3>
+              <p style={{ color: muted, margin: 0, lineHeight: 1.6 }}>{body}</p>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <section className="kc-case-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18, marginBottom: 54 }}>
+        <Photo src={printingAssets.shadowSign} alt="3D printed illuminated Shadow Team sign" style={{ height: 420 }} />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }}>
+          <Photo src={printingAssets.haloLight} alt="3D printed illuminated Halo sign" style={{ height: 201 }} />
+          <Photo src={printingAssets.haloOrnament} alt="3D printed Halo ornament on a Christmas tree" style={{ height: 201 }} />
+          <Photo src={printingAssets.tigerOrnament} alt="3D printed character ornament on a Christmas tree" style={{ height: 201, gridColumn: '1 / -1' }} />
+        </div>
+      </section>
+
+      <section className="kc-case-grid" style={{ display: 'grid', gridTemplateColumns: '.95fr 1.05fr', gap: 28, marginBottom: 54, alignItems: 'center' }}>
+        <div>
+          <div style={label}>the rocket moment</div>
+          <h2 style={{ fontFamily: display, fontSize: 46, lineHeight: 1.03, margin: '12px 0 16px' }}>Month four felt like a rocket was strapped to the shop.</h2>
+          <p style={{ color: muted, lineHeight: 1.7, margin: 0 }}>After KPOP Demon Hunters launched, I saw the same thing fans saw: the lightsticks had the kind of emotional pull that people wanted to hold in real life. Other sellers were making prop versions. I wanted to make one that actually lit up.</p>
+        </div>
+        <div style={{ ...panel, padding: 24 }}>
+          {[
+            ['Spotted the demand', 'The movie hit, fan interest spiked, and I moved quickly while the moment was still fresh.'],
+            ['Learned the electronics', 'I used ChatGPT to guide the LED wiring and troubleshoot how to make the 3D printed object work as a real product.'],
+            ['Launched first', 'About two weeks after the premiere, I became the first seller I could find with an LED light-up version of the lightsticks.'],
+            ['Scaled under pressure', 'The shop jumped to about $8,000, then $22,500 the next month. Honestly, I felt like I was flying by the seat of my pants.']
+          ].map(([title, body]) => (
+            <div key={title} style={{ borderBottom: title === 'Scaled under pressure' ? 0 : '1px solid rgba(255,255,255,.08)', padding: '0 0 16px', marginBottom: 16 }}>
+              <h3 style={{ fontFamily: display, fontSize: 24, margin: '0 0 8px', lineHeight: 1.1 }}>{title}</h3>
+              <p style={{ color: muted, lineHeight: 1.6, margin: 0 }}>{body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style={{ marginBottom: 54 }}>
+        <div style={label}>future media placeholders</div>
+        <h2 style={{ fontFamily: display, fontSize: 40, lineHeight: 1.05, margin: '12px 0 18px' }}>The production story deserves motion.</h2>
+        <div className="kc-case-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+          {placeholders.map((item) => (
+            <div key={item} style={{ minHeight: 210, borderRadius: 18, border: '1px dashed rgba(124,240,192,.36)', background: 'linear-gradient(135deg,rgba(124,240,192,.08),rgba(139,123,245,.08))', display: 'grid', placeItems: 'center', textAlign: 'center', padding: 18 }}>
+              <div>
+                <div style={{ fontFamily: display, fontSize: 24, color: '#EDEDF2', marginBottom: 8 }}>{item}</div>
+                <div style={{ fontFamily: mono, fontSize: 11, color: muted, letterSpacing: '.12em', textTransform: 'uppercase' }}>drop future image or GIF here</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="kc-case-grid" style={{ ...panel, padding: 28, display: 'grid', gridTemplateColumns: '.78fr 1.22fr', gap: 26, alignItems: 'start', marginBottom: 30 }}>
+        <div>
+          <div style={label}>what it proved</div>
+          <h2 style={{ fontFamily: display, fontSize: 42, lineHeight: 1.04, margin: '12px 0 0' }}>This was product design with consequences.</h2>
+        </div>
+        <div style={{ color: muted, lineHeight: 1.75 }}>
+          <p style={{ marginTop: 0 }}>Many customers were parents shopping for children who were fans of the movie. I raced against the clock every day for months to hit deadlines, events, parties, birthdays, and holidays.</p>
+          <p>Because I prototyped and launched so quickly to be first on the market, there were minor flaws in the first version. When customers brought issues to me, I immediately got to work and began shipping the improved final version. I also offered returns or replacements to customers who reached out about V1 issues.</p>
+          <p style={{ marginBottom: 0 }}>To say it was life changing is an understatement. It all started with taking a chance on that first printer, and it grew into Printing Castle LLC, a shop I am excited to keep building in 2026 and beyond.</p>
+        </div>
+      </section>
+
+      <section className="kc-case-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
+        {[
+          ['Bias to action', 'Moved from idea to storefront before overthinking killed momentum.'],
+          ['AI leverage', 'Used ChatGPT as a practical tutor for unfamiliar technical problems.'],
+          ['Customer ownership', 'Handled V1 issues with replacements, returns, and improvements.'],
+          ['Business range', 'Designed, produced, sold, packed, shipped, and supported the product end to end.']
+        ].map(([title, body]) => (
+          <div key={title} style={{ ...panel, padding: 18 }}>
+            <h3 style={{ fontFamily: display, fontSize: 22, lineHeight: 1.08, margin: '0 0 10px' }}>{title}</h3>
+            <p style={{ color: muted, lineHeight: 1.55, fontSize: 14, margin: 0 }}>{body}</p>
+          </div>
+        ))}
+      </section>
+    </main>
+  );
+}
 function LAFitnessCaseStudy({ mono, display }) {
   const muted = '#A8A8B2';
   const panel = { background: 'rgba(13,13,18,.72)', border: '1px solid rgba(255,255,255,.08)', borderRadius: 18, backdropFilter: 'blur(10px)' };
@@ -1596,6 +1785,7 @@ export default function KconPortfolio() {
   const getRoute = () => {
     const hash = window.location.hash;
     const path = window.location.pathname;
+    if (hash === '#printing-castle' || path === '/printing-castle') return '#printing-castle';
     if (hash === '#la-fitness' || path === '/la-fitness') return '#la-fitness';
     if (hash === '#doterra' || path === '/doterra') return '#doterra';
     if (hash === '#work' || hash === '#about' || hash === '#contact') return '/';
@@ -1608,7 +1798,7 @@ export default function KconPortfolio() {
     const onRouteChange = () => {
       const nextRoute = getRoute();
       setRoute(nextRoute);
-      if (nextRoute === '#la-fitness' || nextRoute === '#doterra' || nextRoute === '/ai') {
+      if (nextRoute === '#printing-castle' || nextRoute === '#la-fitness' || nextRoute === '#doterra' || nextRoute === '/ai') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     };
@@ -1701,7 +1891,9 @@ export default function KconPortfolio() {
       {/* Content sits above the fluid (zIndex 5) */}
       <div style={{ position: 'relative', zIndex: 10 }}>
         <div style={{ maxWidth: 1080, margin: '0 auto', width: '100%' }}>
-        {route === '#la-fitness' || route === '/la-fitness' ? (
+        {route === '#printing-castle' || route === '/printing-castle' ? (
+          <PrintingCastleCaseStudy mono={mono} display={display} />
+        ) : route === '#la-fitness' || route === '/la-fitness' ? (
           <LAFitnessCaseStudy mono={mono} display={display} />
         ) : route === '#doterra' || route === '/doterra' ? (
           <DoterraCaseStudy mono={mono} display={display} />
@@ -1751,7 +1943,7 @@ export default function KconPortfolio() {
           </div>
           <div className="kc-work-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {orderedWork.map((p, i) => (
-              <a key={i} href={p.title === 'LA Fitness App Redesign' ? '#la-fitness' : p.title === 'doTERRA Essential Oils App Redesign' ? '#doterra' : p.title === 'Portfolio — Nostalgia Edition' ? 'https://kcon-design.github.io/h3-nostalgia/' : '#'} target={p.title === 'Portfolio — Nostalgia Edition' ? '_blank' : undefined} rel={p.title === 'Portfolio — Nostalgia Edition' ? 'noreferrer' : undefined} className="kc-card kc-work-card" style={{ gridColumn: p.wide ? 'span 2' : 'auto', display: p.wide ? 'grid' : 'block', gridTemplateColumns: p.wide ? '1fr 1.05fr' : undefined, background: 'rgba(13,13,18,0.72)', backdropFilter: 'blur(8px)', border: '1px solid #1E1E26', borderRadius: 16, color: '#EDEDF2', overflow: 'hidden' }}>
+              <a key={i} href={p.title === '3D Printing Shop: 900 Sales' ? '#printing-castle' : p.title === 'LA Fitness App Redesign' ? '#la-fitness' : p.title === 'doTERRA Essential Oils App Redesign' ? '#doterra' : p.title === 'Portfolio — Nostalgia Edition' ? 'https://kcon-design.github.io/h3-nostalgia/' : '#'} target={p.title === 'Portfolio — Nostalgia Edition' ? '_blank' : undefined} rel={p.title === 'Portfolio — Nostalgia Edition' ? 'noreferrer' : undefined} className="kc-card kc-work-card" style={{ gridColumn: p.wide ? 'span 2' : 'auto', display: p.wide ? 'grid' : 'block', gridTemplateColumns: p.wide ? '1fr 1.05fr' : undefined, background: 'rgba(13,13,18,0.72)', backdropFilter: 'blur(8px)', border: '1px solid #1E1E26', borderRadius: 16, color: '#EDEDF2', overflow: 'hidden' }}>
                 <div style={{ minHeight: p.wide ? 230 : 180, height: p.wide ? '100%' : 180, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', fontSize: 54, background: p.grad, overflow: 'hidden' }}>
                   <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px)', backgroundSize: '26px 26px' }} />
                   <span style={{ position: 'absolute', top: 13, left: 13, fontFamily: mono, fontSize: 10, fontWeight: 500, background: 'rgba(4,4,7,.7)', color: '#E8E8F0', padding: '4px 10px', borderRadius: 50, border: '1px solid rgba(255,255,255,.12)', letterSpacing: '.04em' }}>{p.tag}</span>
