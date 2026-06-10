@@ -31,14 +31,14 @@ function Constellation() {
       };
     }
 
-    function size() {
+    function size(reseed = false) {
       DPR = Math.min(window.devicePixelRatio || 1, 2);
       W = window.innerWidth;
       H = Math.max(document.documentElement.scrollHeight, window.innerHeight);
       canvas.width = W * DPR; canvas.height = H * DPR;
       canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      seed();
+      if (reseed || particles.length === 0 || dust.length === 0) seed();
     }
     function seed() {
       // bigger drifting constellation points
@@ -154,15 +154,15 @@ function Constellation() {
       raf = requestAnimationFrame(frame);
     }
 
-    size(); frame();
+    size(true); frame();
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseleave', onLeave);
     let rt;
-    function onResize() { clearTimeout(rt); rt = setTimeout(size, 150); }
+    function onResize() { clearTimeout(rt); rt = setTimeout(() => size(false), 150); }
     window.addEventListener('resize', onResize);
     const ro = setInterval(() => {
       const h = Math.max(document.documentElement.scrollHeight, window.innerHeight);
-      if (Math.abs(h - H) > 40) size();
+      if (Math.abs(h - H) > 40) size(false);
     }, 1000);
 
     return () => {
@@ -773,7 +773,11 @@ function SplashCursor({
     function resizeCanvas() {
       let width = scaleByPixelRatio(canvas.clientWidth);
       let height = scaleByPixelRatio(canvas.clientHeight);
-      if (canvas.width !== width || canvas.height !== height) {
+      const heightDelta = Math.abs(canvas.height - height);
+      const widthChanged = canvas.width !== width;
+      const heightChanged = canvas.height !== height;
+      if (widthChanged || heightChanged) {
+        if (!widthChanged && heightDelta < 96 && window.innerWidth <= 760) return false;
         canvas.width = width;
         canvas.height = height;
         return true;
@@ -1858,7 +1862,13 @@ export default function KconPortfolio() {
           .kc-case-title { font-size: 46px !important; }
           .kc-work-grid { grid-template-columns: 1fr !important; }
           .kc-work-card { grid-column: auto !important; display: block !important; }
-          .kc-about-grid { grid-template-columns: 1fr !important; }
+          .kc-work-card > div:first-child { min-height: 180px !important; height: 180px !important; }
+          .kc-work-card > div:first-child + div > div:nth-child(2) { font-size: 23px !important; }
+          .kc-hero-section { padding: 94px 22px 86px !important; }
+          .kc-hero-title { font-size: 44px !important; line-height: 1.08 !important; letter-spacing: 0 !important; max-width: 100% !important; }
+          .kc-about-grid { grid-template-columns: 1fr !important; padding: 52px 22px !important; gap: 30px !important; }
+          .kc-about-title { width: 100% !important; font-size: 33px !important; line-height: 1.08 !important; }
+          .kc-about-typewrap { display: inline; }
           .kc-nav { gap: 14px !important; }
         }
       `}</style>
@@ -1914,13 +1924,13 @@ export default function KconPortfolio() {
         </div>
 
         {/* hero */}
-        <section style={{ textAlign: 'center', padding: '120px 36px' }}>
+        <section className="kc-hero-section" style={{ textAlign: 'center', padding: '120px 36px' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: mono, fontSize: 11, color: '#7CF0C0', letterSpacing: '.12em', textTransform: 'uppercase', marginBottom: 26 }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#7CF0C0', boxShadow: '0 0 10px #7CF0C0', animation: 'cpp 1.7s infinite' }} />
             open to work
           </div>
           <div style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.3em', textTransform: 'uppercase', color: '#C9C2E8', marginBottom: 22 }}>❯ whoami</div>
-          <h1 style={{ fontFamily: display, fontWeight: 600, fontSize: 76, lineHeight: 1.08, letterSpacing: '-.01em', margin: '0 0 22px', color: '#FBFBFE', textShadow: '0 2px 60px rgba(0,0,0,.7)' }}>
+          <h1 className="kc-hero-title" style={{ fontFamily: display, fontWeight: 600, fontSize: 76, lineHeight: 1.08, letterSpacing: '-.01em', margin: '0 0 22px', color: '#FBFBFE', textShadow: '0 2px 60px rgba(0,0,0,.7)' }}>
             Part designer<br /><span className="kc-grad">part AI whisperer</span><br />all craft.
           </h1>
           <p style={{ fontSize: 16, color: '#C2C2CE', maxWidth: 440, margin: '0 auto 16px', lineHeight: 1.6 }}>
@@ -1932,7 +1942,7 @@ export default function KconPortfolio() {
           </div>
           <div style={{ display: 'flex', gap: 13, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="#contact" className="kc-btn kc-btn-p" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: '#FBFBFE', color: '#040407', letterSpacing: '.02em' }}>get in touch →</a>
-            <a href="#" className="kc-btn kc-btn-g" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: 'rgba(255,255,255,.05)', color: '#EDEDF2', border: '1px solid rgba(255,255,255,.16)', letterSpacing: '.02em', backdropFilter: 'blur(8px)' }}>▶ resume.pdf</a>
+            <a href="./Kevin_Connolly_Resume.pdf" target="_blank" rel="noreferrer" className="kc-btn kc-btn-g" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: 'rgba(255,255,255,.05)', color: '#EDEDF2', border: '1px solid rgba(255,255,255,.16)', letterSpacing: '.02em', backdropFilter: 'blur(8px)' }}>▶ resume.pdf</a>
           </div>
         </section>
 
@@ -1957,8 +1967,7 @@ export default function KconPortfolio() {
                   </div>
                   <div style={{ fontFamily: display, fontWeight: 600, fontSize: p.wide ? 27 : 23, letterSpacing: '-.01em', marginBottom: 9, lineHeight: 1.08 }}>{p.title}</div>
                   <div style={{ fontSize: 14, color: '#9A9AA5', lineHeight: 1.6, marginBottom: 16 }}>{p.desc}</div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid #1E1E26', paddingTop: 14 }}>
-                    <span style={{ fontFamily: mono, fontSize: 11, color: '#6A6A78' }}>⏱ {p.read}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', borderTop: '1px solid #1E1E26', paddingTop: 14 }}>
                     <span style={{ fontFamily: mono, fontSize: 12, fontWeight: 500, color: '#8B7BF5', display: 'flex', alignItems: 'center', gap: 6 }}>{p.cta} <span className="kc-link-i">→</span></span>
                   </div>
                 </div>
@@ -1979,14 +1988,14 @@ export default function KconPortfolio() {
             <div style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.2em', color: '#8B7BF5', marginBottom: 26, display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ width: 22, height: 1, background: '#8B7BF5' }} />ABOUT_ME
             </div>
-            <h2 style={{ fontFamily: display, fontWeight: 600, fontSize: 38, letterSpacing: '-.01em', lineHeight: 1.08, margin: '0 0 18px' }}>
-              Currently crushin' it<br />as a <TypeWords className="kc-grad" words={['product designer.', 'full-time dog dad.', 'UX design wizard.', 'vibe coder.', 'UCF grad.']} />
+            <h2 className="kc-about-title" style={{ fontFamily: display, fontWeight: 600, fontSize: 38, letterSpacing: '-.01em', lineHeight: 1.08, margin: '0 0 18px' }}>
+              Currently crushin' it<br />as a <span className="kc-about-typewrap"><TypeWords className="kc-grad" words={['product designer.', 'full-time dog dad.', 'UX design wizard.', 'vibe coder.', 'UCF grad.']} /></span>
             </h2>
             <p style={{ fontSize: 15, color: '#A8A8B2', lineHeight: 1.7, marginBottom: 14 }}>
               I've shipped work for health, fitness, and local business clients — and I'm returning to the field with <b style={{ color: '#EDEDF2', fontWeight: 500 }}>a sharper focus on AI-era design practices.</b>
             </p>
             <p style={{ fontSize: 15, color: '#A8A8B2', lineHeight: 1.7, marginBottom: 14 }}>
-              Beyond design, I channel my dedication into bodybuilding and creating fitness content for social media. I also run a 3D printing shop and am usually fulfilling orders daily. When I finally have some free time, I dive into the gaming world, enjoying epic adventures in games like Halo, Peak, and Sea of Thieves 🎮.
+              Beyond design, I channel my dedication into bodybuilding and creating fitness content for social media. I also run a 3D printing shop and am constantly bringing customer's ideas to life. When I finally have some free time, I dive into the gaming world, enjoying epic adventures in games like Halo, Peak, and Sea of Thieves 🎮
             </p>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 20 }}>
               {['bodybuilding', 'fitness content', 'gaming', 'dog dad'].map((t, i) => (
@@ -2012,8 +2021,11 @@ export default function KconPortfolio() {
         <footer style={{ padding: '24px 36px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: mono, fontSize: 12, color: '#6A6A78', borderTop: '1px solid rgba(255,255,255,.06)' }}>
           <span>© 2026 KEVIN CONNOLLY — built with intention</span>
           <div>
-            {['linkedin', 'instagram'].map((t, i) => (
-              <a key={i} href="#" style={{ color: '#9A9AA5', marginLeft: 18 }}>{t}</a>
+            {[
+              { label: 'linkedin', href: 'https://www.linkedin.com/in/kcon/' },
+              { label: 'github', href: 'https://github.com/kcon-design' },
+            ].map((link, i) => (
+              <a key={i} href={link.href} target="_blank" rel="noreferrer" style={{ color: '#9A9AA5', marginLeft: 18 }}>{link.label}</a>
             ))}
           </div>
         </footer>
