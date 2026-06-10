@@ -1995,7 +1995,7 @@ export default function KconPortfolio() {
               I've shipped work for health, fitness, and local business clients — and I'm returning to the field with <b style={{ color: '#EDEDF2', fontWeight: 500 }}>a sharper focus on AI-era design practices.</b>
             </p>
             <p style={{ fontSize: 15, color: '#A8A8B2', lineHeight: 1.7, marginBottom: 14 }}>
-              Beyond design, I channel my dedication into bodybuilding and creating fitness content for social media. I also run a 3D printing shop and am constantly bringing customer's ideas to life. When I finally have some free time, I dive into the gaming world, enjoying epic adventures in games like Halo, Peak, and Sea of Thieves 🎮
+              Beyond design, I channel my dedication into bodybuilding and creating fitness content for social media. I also run a 3D printing shop and am constantly bringing customer ideas to life. When I finally have some free time, I dive into the gaming world, enjoying games like Halo, Peak, and Sea of Thieves 🎮
             </p>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 20 }}>
               {['bodybuilding', 'fitness content', 'gaming', 'dog dad'].map((t, i) => (
@@ -2012,8 +2012,8 @@ export default function KconPortfolio() {
           </h2>
           <p style={{ fontFamily: mono, fontSize: 13, color: '#7A7A88', marginBottom: 30, letterSpacing: '.04em' }}>open to ux + product roles — full-time, contract & freelance</p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="#" className="kc-btn kc-btn-p" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: '#FBFBFE', color: '#040407' }}>kevin@kcon.design</a>
-            <a href="#" className="kc-btn kc-btn-g" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: 'rgba(255,255,255,.05)', color: '#EDEDF2', border: '1px solid rgba(255,255,255,.16)' }}>LinkedIn ↗</a>
+            <a href="mailto:kevin@kcon.design" className="kc-btn kc-btn-p" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: '#FBFBFE', color: '#040407' }}>kevin@kcon.design</a>
+            <a href="https://www.linkedin.com/in/kcon/" target="_blank" rel="noreferrer" className="kc-btn kc-btn-g" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: 'rgba(255,255,255,.05)', color: '#EDEDF2', border: '1px solid rgba(255,255,255,.16)' }}>LinkedIn ↗</a>
           </div>
         </section>
 
