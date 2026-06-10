@@ -1145,13 +1145,13 @@ function TypeWords({ words, className }) {
 const work = [
   { wide: true,  icon: '🏋️', tag: '✦ AI_ASSISTED · CASE_STUDY · MOBILE', chips: ['⚡ AI-assisted', 'case study', 'mobile'], title: 'LA Fitness App Redesign', desc: 'Full UX overhaul of the LA Fitness mobile app, focused on improving class booking and member retention flows.', read: '6 min read', cta: 'read it', grad: 'linear-gradient(150deg,#5B4BC4,#8B7BF5)' },
   { wide: false, icon: '🛒', tag: '✦ AI_ASSISTED · PRODUCT', chips: ['⚡ AI-assisted', 'product'], title: '3D Printing Shop: 900 Sales', desc: 'Built and designed a storefront from 0 → 900 sales in its first year.', read: '5 min read', cta: 'read it', grad: 'linear-gradient(150deg,#0F7A5A,#34D399)' },
-  { wide: false, icon: '🎮', tag: 'UI_DESIGN · MOCKUP', chips: ['⚡ vibe-coded', 'ui design'], title: 'Portfolio — Nostalgia Edition', desc: 'A fun redesign of my portfolio, inspired by the timeless menu seen in THE game of all time. Built with Codex + GitHub.', read: '6 min read', cta: 'play it', grad: 'linear-gradient(150deg,#1C1830,#3A3060)' },
+  { wide: false, icon: '🎮', tag: 'UI_DESIGN · MOCKUP', chips: ['⚡ vibe-coded', 'ui design'], title: 'H3 Menu Remake', desc: 'A remake of the timeless menu seen in THE game of all time. Built entirely with Codex.', read: '6 min read', cta: 'play it', grad: 'linear-gradient(150deg,#1C1830,#3A3060)' },
   { wide: true,  icon: '🌿', tag: 'MOBILE · FIGMA', chips: ['mobile', 'figma'], title: 'doTERRA Essential Oils App Redesign', desc: 'Redesigned the doTERRA mobile experience to improve product discovery and streamline the purchase journey.', read: '5 min read', cta: 'read it', grad: 'linear-gradient(150deg,#A03A78,#F079C4)' }
 ];
 
 const workOrder = [
   '3D Printing Shop: 900 Sales',
-  'Portfolio — Nostalgia Edition',
+  'H3 Menu Remake',
   'doTERRA Essential Oils App Redesign',
   'LA Fitness App Redesign'
 ];
@@ -1953,7 +1953,7 @@ export default function KconPortfolio() {
           </div>
           <div className="kc-work-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {orderedWork.map((p, i) => (
-              <a key={i} href={p.title === '3D Printing Shop: 900 Sales' ? '#printing-castle' : p.title === 'LA Fitness App Redesign' ? '#la-fitness' : p.title === 'doTERRA Essential Oils App Redesign' ? '#doterra' : p.title === 'Portfolio — Nostalgia Edition' ? 'https://kcon-design.github.io/h3-nostalgia/' : '#'} target={p.title === 'Portfolio — Nostalgia Edition' ? '_blank' : undefined} rel={p.title === 'Portfolio — Nostalgia Edition' ? 'noreferrer' : undefined} className="kc-card kc-work-card" style={{ gridColumn: p.wide ? 'span 2' : 'auto', display: p.wide ? 'grid' : 'block', gridTemplateColumns: p.wide ? '1fr 1.05fr' : undefined, background: 'rgba(13,13,18,0.72)', backdropFilter: 'blur(8px)', border: '1px solid #1E1E26', borderRadius: 16, color: '#EDEDF2', overflow: 'hidden' }}>
+              <a key={i} href={p.title === '3D Printing Shop: 900 Sales' ? '#printing-castle' : p.title === 'LA Fitness App Redesign' ? '#la-fitness' : p.title === 'doTERRA Essential Oils App Redesign' ? '#doterra' : p.title === 'H3 Menu Remake' ? 'https://www.kcon.design/h3-menu-remake/' : '#'} target={p.title === 'H3 Menu Remake' ? '_blank' : undefined} rel={p.title === 'H3 Menu Remake' ? 'noreferrer' : undefined} className="kc-card kc-work-card" style={{ gridColumn: p.wide ? 'span 2' : 'auto', display: p.wide ? 'grid' : 'block', gridTemplateColumns: p.wide ? '1fr 1.05fr' : undefined, background: 'rgba(13,13,18,0.72)', backdropFilter: 'blur(8px)', border: '1px solid #1E1E26', borderRadius: 16, color: '#EDEDF2', overflow: 'hidden' }}>
                 <div style={{ minHeight: p.wide ? 230 : 180, height: p.wide ? '100%' : 180, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', fontSize: 54, background: p.grad, overflow: 'hidden' }}>
                   <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px)', backgroundSize: '26px 26px' }} />
                   <span style={{ position: 'absolute', top: 13, left: 13, fontFamily: mono, fontSize: 10, fontWeight: 500, background: 'rgba(4,4,7,.7)', color: '#E8E8F0', padding: '4px 10px', borderRadius: 50, border: '1px solid rgba(255,255,255,.12)', letterSpacing: '.04em' }}>{p.tag}</span>
