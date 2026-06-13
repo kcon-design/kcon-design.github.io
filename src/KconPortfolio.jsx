@@ -1297,8 +1297,7 @@ function PrintingCastleCaseStudy({ mono, display }) {
         <nav className="kc-nav" style={{ display: 'flex', gap: 22 }}>
           {[
             ['work', '/#work'],
-            ['about', '/#about'],
-            ['AI Lab', '/ai']
+            ['about', '/#about']
           ].map(([t, href], i) => (
             <a key={i} href={href} style={{ fontSize: 12, color: '#9A9AA5', letterSpacing: '.04em' }}>{t}</a>
           ))}
@@ -1458,8 +1457,7 @@ function LAFitnessCaseStudy({ mono, display }) {
         <nav className="kc-nav" style={{ display: 'flex', gap: 22 }}>
           {[
             ['work', '/#work'],
-            ['about', '/#about'],
-            ['AI Lab', '/ai']
+            ['about', '/#about']
           ].map(([t, href], i) => (
             <a key={i} href={href} style={{ fontSize: 12, color: '#9A9AA5', letterSpacing: '.04em' }}>{t}</a>
           ))}
@@ -1720,8 +1718,7 @@ function DoterraCaseStudy({ mono, display }) {
         <nav className="kc-nav" style={{ display: 'flex', gap: 22 }}>
           {[
             ['work', '/#work'],
-            ['about', '/#about'],
-            ['AI Lab', '/ai']
+            ['about', '/#about']
           ].map(([t, href], i) => (
             <a key={i} href={href} style={{ fontSize: 12, color: '#9A9AA5', letterSpacing: '.04em' }}>{t}</a>
           ))}
@@ -1793,7 +1790,6 @@ export default function KconPortfolio() {
     if (hash === '#la-fitness' || path === '/la-fitness') return '#la-fitness';
     if (hash === '#doterra' || path === '/doterra') return '#doterra';
     if (hash === '#work' || hash === '#about' || hash === '#contact') return '/';
-    if (path === '/ai') return '/ai';
     return '/';
   };
   const [route, setRoute] = useState(getRoute);
@@ -1802,7 +1798,7 @@ export default function KconPortfolio() {
     const onRouteChange = () => {
       const nextRoute = getRoute();
       setRoute(nextRoute);
-      if (nextRoute === '#printing-castle' || nextRoute === '#la-fitness' || nextRoute === '#doterra' || nextRoute === '/ai') {
+      if (nextRoute === '#printing-castle' || nextRoute === '#la-fitness' || nextRoute === '#doterra') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     };
@@ -1915,8 +1911,7 @@ export default function KconPortfolio() {
           <nav className="kc-nav" style={{ display: 'flex', gap: 22 }}>
             {[
               ['work', '#work'],
-              ['about', '#about'],
-              ['AI Lab', '/ai']
+              ['about', '#about']
             ].map(([t, href], i) => (
               <a key={i} href={href} style={{ fontSize: 12, color: '#9A9AA5', letterSpacing: '.04em' }}>{t}</a>
             ))}
@@ -1981,7 +1976,7 @@ export default function KconPortfolio() {
             <div style={{ aspectRatio: '4/5', borderRadius: 18, position: 'relative', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)' }}>
               <img src="./assets/kira.jpg" alt="Kevin and his dog Kira at BarkSuds" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
-            <div style={{ fontFamily: mono, fontSize: 11, color: '#8F8F9C', letterSpacing: '.04em', textAlign: 'center', marginTop: 12 }}>me and my most important client 🐾</div>
+            <div style={{ fontFamily: mono, fontSize: 11, color: '#8F8F9C', letterSpacing: '.04em', textAlign: 'center', marginTop: 12 }}>my most important client 🐾</div>
           </div>
           <div>
             <div style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.2em', color: '#8B7BF5', marginBottom: 26, display: 'flex', alignItems: 'center', gap: 10 }}>
