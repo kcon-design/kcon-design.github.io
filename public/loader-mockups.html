@@ -1,0 +1,333 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loader Transition Mockup</title>
+  <style>
+    :root {
+      --bg: #050507;
+      --ink: #f6f5ff;
+      --muted: rgba(246, 245, 255, 0.64);
+      --line: rgba(255, 255, 255, 0.12);
+      --violet: #9b7cff;
+      --mint: #6ff3c8;
+      --pink: #ff6ac8;
+      --gold: #ffc56b;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #08080c; color: var(--ink); }
+    body {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      overflow-x: hidden;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 18px;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(115, 138, 255, 0.22), transparent 26%),
+        radial-gradient(circle at 82% 72%, rgba(52, 221, 171, 0.12), transparent 30%),
+        #050507;
+    }
+
+    .shell {
+      width: min(1080px, 100%);
+      display: grid;
+      grid-template-columns: minmax(320px, 410px) 1fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .copy { max-width: 520px; }
+    .eyebrow {
+      color: #a996ff;
+      letter-spacing: 0.28em;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(38px, 5vw, 72px);
+      line-height: 0.94;
+      letter-spacing: 0;
+    }
+
+    .grad {
+      background: linear-gradient(95deg, var(--violet), var(--mint), var(--pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .copy p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .controls { display: flex; gap: 12px; flex-wrap: wrap; }
+    button {
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      color: var(--ink);
+      padding: 12px 16px;
+      border-radius: 999px;
+      font: inherit;
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+    button:hover { transform: translateY(-1px); border-color: rgba(255,255,255,0.32); background: rgba(255,255,255,0.12); }
+
+    .phone {
+      position: relative;
+      width: min(390px, 92vw);
+      aspect-ratio: 390 / 760;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 36px;
+      overflow: hidden;
+      background: #050507;
+      box-shadow: 0 24px 90px rgba(0,0,0,0.5), inset 0 0 0 8px rgba(255,255,255,0.02);
+    }
+
+    .home, .loader {
+      position: absolute;
+      inset: 0;
+    }
+
+    .home {
+      padding: 28px 26px;
+      opacity: 0.28;
+      transform: translateY(10px) scale(0.985);
+      background:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+        radial-gradient(circle at 22% 32%, rgba(117,145,255,0.24), transparent 18%),
+        radial-gradient(circle at 82% 68%, rgba(65,230,180,0.14), transparent 22%),
+        #060609;
+      background-size: auto, 42px 42px, auto, auto, auto;
+      overflow: hidden;
+      animation: homeReveal 4.2s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .home::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.82) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,0.34) 0 1px, transparent 1.4px);
+      background-size: 74px 74px, 119px 119px;
+      opacity: 0.42;
+      pointer-events: none;
+    }
+
+    .nav, .hero, .work-card { position: relative; z-index: 1; }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 118px;
+    }
+    .nav span:last-child { display: flex; gap: 18px; color: rgba(255,255,255,0.56); }
+
+    .status {
+      width: max-content;
+      margin: 0 auto 28px;
+      color: #83ffd8;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+    .status::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-right: 10px;
+      background: #75f0c4;
+      box-shadow: 0 0 18px #75f0c4;
+    }
+
+    .hero h2 {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 54px;
+      line-height: 0.97;
+      text-align: center;
+      letter-spacing: 0;
+    }
+    .hero p {
+      max-width: 285px;
+      margin: 22px auto 0;
+      text-align: center;
+      color: rgba(255,255,255,0.72);
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .work-label {
+      margin-top: 110px;
+      color: #a996ff;
+      letter-spacing: 0.24em;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+    .work-card {
+      margin-top: 18px;
+      min-height: 135px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.045);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 45% 1fr;
+    }
+    .thumb {
+      background:
+        linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
+        linear-gradient(135deg, #19c58e, #8368ff);
+      background-size: 22px 22px, 22px 22px, auto;
+      display: grid;
+      place-items: center;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+    }
+    .card-copy { padding: 18px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    .card-copy strong { display: block; font-size: 17px; line-height: 1.1; margin-bottom: 8px; }
+    .card-copy span { color: rgba(255,255,255,0.58); font-size: 12px; line-height: 1.45; }
+
+    .loader {
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(124, 106, 255, 0.08), transparent 34%),
+        #050507;
+      animation: loaderExit 4.2s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .loader-inner {
+      position: relative;
+      width: 190px;
+      height: 190px;
+      display: grid;
+      place-items: center;
+    }
+
+    .breathing-star {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 45% 46%, #fff 0 8%, #f8f0a6 12%, #ff6eb9 30%, #6ff3c8 52%, rgba(111,243,200,0) 70%);
+      box-shadow:
+        0 0 22px rgba(255,255,255,0.75),
+        0 0 58px rgba(255,106,200,0.64),
+        0 0 92px rgba(111,243,200,0.45);
+      filter: blur(0.2px) saturate(1.12);
+      animation: breathe 1.55s ease-in-out infinite, nova 4.2s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .breathing-star::before {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 38px;
+      margin: 10px 0 0 -51px;
+      border-radius: 999px;
+      transform: rotate(-18deg);
+      background: linear-gradient(90deg, transparent, rgba(116,255,211,0.42), rgba(255,105,190,0.55), transparent);
+      filter: blur(10px);
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(0.86); opacity: 0.72; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+    @keyframes nova {
+      0%, 50% { transform: scale(0.92); }
+      72% { transform: scale(1.12); opacity: 1; }
+      100% { transform: scale(17); opacity: 0; filter: blur(5px) saturate(0.9); }
+    }    @keyframes loaderExit {
+      0%, 67% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+    @keyframes homeReveal {
+      0%, 58% { opacity: 0.22; transform: translateY(12px) scale(0.985); filter: blur(1.5px); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    .replay .home,
+    .replay .loader,
+    .replay .breathing-star { animation-name: none; }
+
+    @media (max-width: 860px) {
+      .shell { grid-template-columns: 1fr; justify-items: center; gap: 26px; }
+      .copy { text-align: center; order: 2; }
+      .controls { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="shell">
+      <div class="phone" id="demo">
+        <div class="home">
+          <div class="nav"><strong>~/kevinconnolly</strong><span><span>work</span><span>about</span></span></div>
+          <div class="hero">
+            <div class="status">open to work</div>
+            <h2>Part<br>designer<br><span class="grad">part AI<br>whisperer</span><br>all craft.</h2>
+            <p>I use AI as a creative material, not a crutch.</p>
+          </div>
+          <div class="work-label">selected_work</div>
+          <div class="work-card">
+            <div class="thumb">900+</div>
+            <div class="card-copy"><strong>3D Printing Shop</strong><span>From first printer to 900+ Etsy sales.</span></div>
+          </div>
+        </div>
+        <div class="loader">
+          <div class="loader-inner">
+            <div class="breathing-star"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="copy">
+        <div class="eyebrow">mobile-only loader idea</div>
+        <h1>Breathing star into <span class="grad">soft supernova</span>.</h1>
+        <p>This mockup keeps the real homepage underneath, so the loader feels like a quick veil instead of a separate screen. The star breathes for a beat, expands outward, then dissolves into the page.</p>
+        <div class="controls">
+          <button type="button" id="replay">Replay transition</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const demo = document.getElementById('demo');
+    const replay = document.getElementById('replay');
+
+    replay.addEventListener('click', () => {
+      demo.classList.add('replay');
+      void demo.offsetWidth;
+      demo.classList.remove('replay');
+    });
+  </script>
+</body>
+</html>
+
+
+
