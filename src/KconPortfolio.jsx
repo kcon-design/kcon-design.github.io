@@ -1934,8 +1934,7 @@ export default function KconPortfolio() {
             Part designer<br /><span className="kc-grad">part AI whisperer</span><br />all craft.
           </h1>
           <p style={{ fontSize: 16, color: '#C2C2CE', maxWidth: 440, margin: '0 auto 16px', lineHeight: 1.6 }}>
-            I use AI as a creative material — <b style={{ color: '#FBFBFE', fontWeight: 500 }}>not a crutch.</b><br />
-            Looking for the next right thing.
+            I use AI as a creative material — <b style={{ color: '#FBFBFE', fontWeight: 500 }}>not a crutch.</b>
           </p>
           <div style={{ fontFamily: mono, fontSize: 13, color: '#A2A2AE', letterSpacing: '.04em', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginBottom: 34 }}>
             UX + Product <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#4A4A55' }} /> 6+ years
