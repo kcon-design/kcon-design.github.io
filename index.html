@@ -18,9 +18,57 @@
       body {
         overflow-x: hidden;
       }
+      @keyframes kconLoaderExit {
+        0%, 67% { opacity: 1; }
+        100% { opacity: 0; visibility: hidden; }
+      }
+      @keyframes kconLoaderBreathe {
+        0%, 100% { transform: scale(0.86); opacity: 0.72; }
+        50% { transform: scale(1.08); opacity: 1; }
+      }
+      @keyframes kconLoaderNova {
+        0%, 50% { transform: scale(0.92); }
+        72% { transform: scale(1.12); opacity: 1; }
+        100% { transform: scale(17); opacity: 0; filter: blur(5px) saturate(0.9); }
+      }
+      #kcon-mobile-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: none;
+        place-items: center;
+        pointer-events: none;
+        background: radial-gradient(circle at 50% 50%, rgba(124, 106, 255, 0.08), transparent 34%), #050507;
+        animation: kconLoaderExit 4.2s cubic-bezier(.2,.8,.2,1) both;
+      }
+      #kcon-mobile-loader-star {
+        position: relative;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 45% 46%, #fff 0 8%, #f8f0a6 12%, #ff6eb9 30%, #6ff3c8 52%, rgba(111,243,200,0) 70%);
+        box-shadow: 0 0 22px rgba(255,255,255,0.75), 0 0 58px rgba(255,106,200,0.64), 0 0 92px rgba(111,243,200,0.45);
+        filter: blur(0.2px) saturate(1.12);
+        animation: kconLoaderBreathe 1.55s ease-in-out infinite, kconLoaderNova 4.2s cubic-bezier(.2,.8,.2,1) both;
+      }
+      #kcon-mobile-loader-star::before {
+        content: "";
+        position: absolute;
+        width: 160px;
+        height: 38px;
+        margin: 10px 0 0 -51px;
+        border-radius: 999px;
+        transform: rotate(-18deg);
+        background: linear-gradient(90deg, transparent, rgba(116,255,211,0.42), rgba(255,105,190,0.55), transparent);
+        filter: blur(10px);
+      }
+      @media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+        #kcon-mobile-loader { display: grid; }
+      }
     </style>
   </head>
   <body>
+    <div id="kcon-mobile-loader" aria-hidden="true"><div id="kcon-mobile-loader-star"></div></div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

@@ -1143,10 +1143,10 @@ function TypeWords({ words, className }) {
    Portfolio content - sits above the fluid canvas
    ============================================================ */
 const work = [
-  { wide: true,  icon: 'ðŸ‹ï¸', tag: 'âœ¦ AI_ASSISTED Â· CASE_STUDY Â· MOBILE', chips: ['âš¡ AI-assisted', 'case study', 'mobile'], title: 'LA Fitness App Redesign', desc: 'Full UX overhaul of the LA Fitness mobile app, focused on improving class booking and member retention flows.', read: '6 min read', cta: 'read it', grad: 'linear-gradient(150deg,#5B4BC4,#8B7BF5)' },
-  { wide: false, icon: 'ðŸ›’', tag: 'âœ¦ AI_ASSISTED Â· PRODUCT', chips: ['âš¡ AI-assisted', 'product'], title: '3D Printing Shop: 900 Sales', desc: 'Built and designed a storefront from 0 â†’ 900 sales in its first year.', read: '5 min read', cta: 'read it', grad: 'linear-gradient(150deg,#0F7A5A,#34D399)' },
-  { wide: false, icon: 'ðŸŽ®', tag: 'UI_DESIGN Â· MOCKUP', chips: ['âš¡ vibe-coded', 'ui design'], title: 'H3 Menu Remake', desc: 'A remake of the timeless menu seen in THE game of all time. Built entirely with Codex.', read: '6 min read', cta: 'play it', grad: 'linear-gradient(150deg,#1C1830,#3A3060)' },
-  { wide: true,  icon: 'ðŸŒ¿', tag: 'MOBILE Â· FIGMA', chips: ['mobile', 'figma'], title: 'doTERRA Essential Oils App Redesign', desc: 'Redesigned the doTERRA mobile experience to improve product discovery and streamline the purchase journey.', read: '5 min read', cta: 'read it', grad: 'linear-gradient(150deg,#A03A78,#F079C4)' }
+  { wide: true,  icon: '🏋️', tag: '✦ AI_ASSISTED · CASE_STUDY · MOBILE', chips: ['⚡ AI-assisted', 'case study', 'mobile'], title: 'LA Fitness App Redesign', desc: 'Full UX overhaul of the LA Fitness mobile app, focused on improving class booking and member retention flows.', read: '6 min read', cta: 'read it', grad: 'linear-gradient(150deg,#5B4BC4,#8B7BF5)' },
+  { wide: false, icon: '🛒', tag: '✦ AI_ASSISTED · PRODUCT', chips: ['⚡ AI-assisted', 'product'], title: '3D Printing Shop: 900 Sales', desc: 'Built and designed a storefront from 0 → 900 sales in its first year.', read: '5 min read', cta: 'read it', grad: 'linear-gradient(150deg,#0F7A5A,#34D399)' },
+  { wide: false, icon: '🎮', tag: 'UI_DESIGN · MOCKUP', chips: ['⚡ vibe-coded', 'ui design'], title: 'H3 Menu Remake', desc: 'A remake of the timeless menu seen in THE game of all time. Built entirely with Codex.', read: '6 min read', cta: 'play it', grad: 'linear-gradient(150deg,#1C1830,#3A3060)' },
+  { wide: true,  icon: '🌿', tag: 'MOBILE · FIGMA', chips: ['mobile', 'figma'], title: 'doTERRA Essential Oils App Redesign', desc: 'Redesigned the doTERRA mobile experience to improve product discovery and streamline the purchase journey.', read: '5 min read', cta: 'read it', grad: 'linear-gradient(150deg,#A03A78,#F079C4)' }
 ];
 
 const workOrder = [
@@ -1257,8 +1257,8 @@ function CaseSlideshow({ label, slides, mono, aspectRatio = '2 / 1', style }) {
         </div>
         {slides.length > 1 && (
           <>
-            <button aria-label="Previous slide" onClick={() => go(-1)} style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', width: 42, height: 42, border: 0, background: 'transparent', color: '#9A9AA5', fontSize: 48, lineHeight: 1, cursor: 'pointer' }}>â€¹</button>
-            <button aria-label="Next slide" onClick={() => go(1)} style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', width: 42, height: 42, border: 0, background: 'transparent', color: '#9A9AA5', fontSize: 48, lineHeight: 1, cursor: 'pointer' }}>â€º</button>
+            <button aria-label="Previous slide" onClick={() => go(-1)} style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', width: 42, height: 42, border: 0, background: 'transparent', color: '#9A9AA5', fontSize: 48, lineHeight: 1, cursor: 'pointer' }}>‹</button>
+            <button aria-label="Next slide" onClick={() => go(1)} style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', width: 42, height: 42, border: 0, background: 'transparent', color: '#9A9AA5', fontSize: 48, lineHeight: 1, cursor: 'pointer' }}>›</button>
           </>
         )}
       </div>
@@ -1678,9 +1678,9 @@ function DoterraPhoneCompare({ mono, display, oldScreens, redesignScreens }) {
       <div className="kc-doterra-comparison" style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: 30, alignItems: 'center' }}>
         <Phone label="Old App" src={oldSrc} />
         <div className="kc-doterra-controls" style={{ display: 'grid', justifyItems: 'center', gap: 18, alignSelf: 'center' }}>
-          <button aria-label="Previous comparison screen" onClick={() => go(-1)} style={{ width: 48, height: 48, borderRadius: 999, border: '1px solid rgba(255,255,255,.14)', background: 'rgba(255,255,255,.06)', color: '#EDEDF2', fontSize: 30, lineHeight: 1, cursor: 'pointer' }}>â€¹</button>
+          <button aria-label="Previous comparison screen" onClick={() => go(-1)} style={{ width: 48, height: 48, borderRadius: 999, border: '1px solid rgba(255,255,255,.14)', background: 'rgba(255,255,255,.06)', color: '#EDEDF2', fontSize: 30, lineHeight: 1, cursor: 'pointer' }}>‹</button>
           <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.14em', color: '#9A9AA5', writingMode: 'vertical-rl', textTransform: 'uppercase' }}>tap to compare</div>
-          <button aria-label="Next comparison screen" onClick={() => go(1)} style={{ width: 48, height: 48, borderRadius: 999, border: '1px solid rgba(255,255,255,.14)', background: 'rgba(182,106,216,.18)', color: '#FFFFFF', fontSize: 30, lineHeight: 1, cursor: 'pointer' }}>â€º</button>
+          <button aria-label="Next comparison screen" onClick={() => go(1)} style={{ width: 48, height: 48, borderRadius: 999, border: '1px solid rgba(255,255,255,.14)', background: 'rgba(182,106,216,.18)', color: '#FFFFFF', fontSize: 30, lineHeight: 1, cursor: 'pointer' }}>›</button>
           <div style={{ fontFamily: mono, fontSize: 11, color: '#777784', letterSpacing: '.1em' }}>{index + 1} / {total}</div>
         </div>
         <Phone label="Redesign" src={redesignSrc} />
@@ -1779,27 +1779,6 @@ function DoterraCaseStudy({ mono, display }) {
     </main>
   );
 }
-function MobileIntroLoader() {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const isMobile = window.matchMedia('(max-width: 760px)').matches;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!isMobile || reduceMotion) return;
-
-    setShow(true);
-    const timer = window.setTimeout(() => setShow(false), 4300);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  if (!show) return null;
-
-  return (
-    <div className="kc-mobile-loader" aria-hidden="true">
-      <div className="kc-mobile-loader-star" />
-    </div>
-  );
-}
 export default function KconPortfolio() {
   const mono = "'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace";
   const sans = "'Geist', system-ui, sans-serif";
@@ -1851,56 +1830,7 @@ export default function KconPortfolio() {
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
         @import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
         @keyframes cpp { 0%,100%{opacity:1} 50%{opacity:0.3} }
-        @keyframes kc-mobile-loader-breathe {
-          0%, 100% { transform: scale(0.86); opacity: 0.72; }
-          50% { transform: scale(1.08); opacity: 1; }
-        }
-        @keyframes kc-mobile-loader-nova {
-          0%, 50% { transform: scale(0.92); }
-          72% { transform: scale(1.12); opacity: 1; }
-          100% { transform: scale(17); opacity: 0; filter: blur(5px) saturate(0.9); }
-        }
-        @keyframes kc-mobile-loader-exit {
-          0%, 67% { opacity: 1; }
-          100% { opacity: 0; visibility: hidden; }
-        }
-        .kc-mobile-loader {
-          position: fixed;
-          inset: 0;
-          z-index: 9999;
-          display: none;
-          place-items: center;
-          pointer-events: none;
-          background: radial-gradient(circle at 50% 50%, rgba(124, 106, 255, 0.08), transparent 34%), #050507;
-          animation: kc-mobile-loader-exit 4.2s cubic-bezier(.2,.8,.2,1) both;
-        }
-        .kc-mobile-loader-star {
-          position: relative;
-          width: 58px;
-          height: 58px;
-          border-radius: 50%;
-          background: radial-gradient(circle at 45% 46%, #fff 0 8%, #f8f0a6 12%, #ff6eb9 30%, #6ff3c8 52%, rgba(111,243,200,0) 70%);
-          box-shadow: 0 0 22px rgba(255,255,255,0.75), 0 0 58px rgba(255,106,200,0.64), 0 0 92px rgba(111,243,200,0.45);
-          filter: blur(0.2px) saturate(1.12);
-          animation: kc-mobile-loader-breathe 1.55s ease-in-out infinite, kc-mobile-loader-nova 4.2s cubic-bezier(.2,.8,.2,1) both;
-        }
-        .kc-mobile-loader-star::before {
-          content: "";
-          position: absolute;
-          width: 160px;
-          height: 38px;
-          margin: 10px 0 0 -51px;
-          border-radius: 999px;
-          transform: rotate(-18deg);
-          background: linear-gradient(90deg, transparent, rgba(116,255,211,0.42), rgba(255,105,190,0.55), transparent);
-          filter: blur(10px);
-        }
-        @media (max-width: 760px) {
-          .kc-mobile-loader { display: grid; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .kc-mobile-loader { display: none !important; }
-        }        .kc-card:hover { transform: translateY(-5px); border-color:#3A3550 !important; box-shadow:0 18px 40px rgba(0,0,0,0.5); }
+        .kc-card:hover { transform: translateY(-5px); border-color:#3A3550 !important; box-shadow:0 18px 40px rgba(0,0,0,0.5); }
         .kc-card { transition: all .22s; }
         .kc-link-i { transition: transform .2s; display:inline-block; }
         .kc-card:hover .kc-link-i { transform: translateX(4px); }
@@ -1994,19 +1924,19 @@ export default function KconPortfolio() {
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#7CF0C0', boxShadow: '0 0 10px #7CF0C0', animation: 'cpp 1.7s infinite' }} />
             open to work
           </div>
-          <div style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.3em', textTransform: 'uppercase', color: '#C9C2E8', marginBottom: 22 }}>â¯ whoami</div>
+          <div style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.3em', textTransform: 'uppercase', color: '#C9C2E8', marginBottom: 22 }}>❯ whoami</div>
           <h1 className="kc-hero-title" style={{ fontFamily: display, fontWeight: 600, fontSize: 76, lineHeight: 1.08, letterSpacing: '-.01em', margin: '0 0 22px', color: '#FBFBFE', textShadow: '0 2px 60px rgba(0,0,0,.7)' }}>
             Part designer<br /><span className="kc-grad">part AI whisperer</span><br />all craft.
           </h1>
           <p style={{ fontSize: 16, color: '#C2C2CE', maxWidth: 440, margin: '0 auto 16px', lineHeight: 1.6 }}>
-            I use AI as a creative material â€” <b style={{ color: '#FBFBFE', fontWeight: 500 }}>not a crutch.</b>
+            I use AI as a creative material — <b style={{ color: '#FBFBFE', fontWeight: 500 }}>not a crutch.</b>
           </p>
           <div style={{ fontFamily: mono, fontSize: 13, color: '#A2A2AE', letterSpacing: '.04em', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginBottom: 34 }}>
             UX + Product <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#4A4A55' }} /> 6+ years
           </div>
           <div style={{ display: 'flex', gap: 13, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="#contact" className="kc-btn kc-btn-p" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: '#FBFBFE', color: '#040407', letterSpacing: '.02em' }}>get in touch â†’</a>
-            <a href="./Kevin_Connolly_Resume.pdf" target="_blank" rel="noreferrer" className="kc-btn kc-btn-g" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: 'rgba(255,255,255,.05)', color: '#EDEDF2', border: '1px solid rgba(255,255,255,.16)', letterSpacing: '.02em', backdropFilter: 'blur(8px)' }}>â–¶ resume.pdf</a>
+            <a href="#contact" className="kc-btn kc-btn-p" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: '#FBFBFE', color: '#040407', letterSpacing: '.02em' }}>get in touch →</a>
+            <a href="./Kevin_Connolly_Resume.pdf" target="_blank" rel="noreferrer" className="kc-btn kc-btn-g" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: 'rgba(255,255,255,.05)', color: '#EDEDF2', border: '1px solid rgba(255,255,255,.16)', letterSpacing: '.02em', backdropFilter: 'blur(8px)' }}>▶ resume.pdf</a>
           </div>
         </section>
 
@@ -2026,13 +1956,13 @@ export default function KconPortfolio() {
                 <div style={{ padding: '22px 24px 24px' }}>
                   <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginBottom: 12 }}>
                     {p.chips.map((c, j) => (
-                      <span key={j} style={{ fontFamily: mono, fontSize: 10, fontWeight: 500, padding: '4px 10px', borderRadius: 50, background: c.includes('âš¡') ? 'rgba(139,123,245,.16)' : '#1C1C24', color: c.includes('âš¡') ? '#A595F7' : '#9A9AA5', letterSpacing: '.04em' }}>{c}</span>
+                      <span key={j} style={{ fontFamily: mono, fontSize: 10, fontWeight: 500, padding: '4px 10px', borderRadius: 50, background: c.includes('⚡') ? 'rgba(139,123,245,.16)' : '#1C1C24', color: c.includes('⚡') ? '#A595F7' : '#9A9AA5', letterSpacing: '.04em' }}>{c}</span>
                     ))}
                   </div>
                   <div style={{ fontFamily: display, fontWeight: 600, fontSize: p.wide ? 27 : 23, letterSpacing: '-.01em', marginBottom: 9, lineHeight: 1.08 }}>{p.title}</div>
                   <div style={{ fontSize: 14, color: '#9A9AA5', lineHeight: 1.6, marginBottom: 16 }}>{p.desc}</div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', borderTop: '1px solid #1E1E26', paddingTop: 14 }}>
-                    <span style={{ fontFamily: mono, fontSize: 12, fontWeight: 500, color: '#8B7BF5', display: 'flex', alignItems: 'center', gap: 6 }}>{p.cta} <span className="kc-link-i">â†’</span></span>
+                    <span style={{ fontFamily: mono, fontSize: 12, fontWeight: 500, color: '#8B7BF5', display: 'flex', alignItems: 'center', gap: 6 }}>{p.cta} <span className="kc-link-i">→</span></span>
                   </div>
                 </div>
               </a>
@@ -2046,7 +1976,7 @@ export default function KconPortfolio() {
             <div style={{ aspectRatio: '4/5', borderRadius: 18, position: 'relative', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)' }}>
               <img src="./assets/kira.jpg" alt="Kevin and his dog Kira at BarkSuds" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
-            <div style={{ fontFamily: mono, fontSize: 11, color: '#8F8F9C', letterSpacing: '.04em', textAlign: 'center', marginTop: 12 }}>my most important client ðŸ¾</div>
+            <div style={{ fontFamily: mono, fontSize: 11, color: '#8F8F9C', letterSpacing: '.04em', textAlign: 'center', marginTop: 12 }}>my most important client 🐾</div>
           </div>
           <div>
             <div style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.2em', color: '#8B7BF5', marginBottom: 26, display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -2056,10 +1986,10 @@ export default function KconPortfolio() {
               Currently crushin' it<br />as a <span className="kc-about-typewrap"><TypeWords className="kc-grad" words={['product designer.', 'full-time dog dad.', 'UX design wizard.', 'vibe coder.', 'UCF grad.']} /></span>
             </h2>
             <p style={{ fontSize: 15, color: '#A8A8B2', lineHeight: 1.7, marginBottom: 14 }}>
-              I've shipped work for health, fitness, and local business clients â€” and I'm returning to the field with <b style={{ color: '#EDEDF2', fontWeight: 500 }}>a sharper focus on AI-era design practices.</b>
+              I've shipped work for health, fitness, and local business clients — and I'm returning to the field with <b style={{ color: '#EDEDF2', fontWeight: 500 }}>a sharper focus on AI-era design practices.</b>
             </p>
             <p style={{ fontSize: 15, color: '#A8A8B2', lineHeight: 1.7, marginBottom: 14 }}>
-              Beyond design, I channel my dedication into bodybuilding and creating fitness content for social media. I also run a 3D printing shop and am constantly bringing customer ideas to life. When I finally have some free time, I dive into the gaming world, enjoying games like Halo, Peak, and Sea of Thieves ðŸŽ®
+              Beyond design, I channel my dedication into bodybuilding and creating fitness content for social media. I also run a 3D printing shop and am constantly bringing customer ideas to life. When I finally have some free time, I dive into the gaming world, enjoying games like Halo, Peak, and Sea of Thieves 🎮
             </p>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 20 }}>
               {['bodybuilding', 'fitness content', 'gaming', 'dog dad'].map((t, i) => (
@@ -2074,16 +2004,16 @@ export default function KconPortfolio() {
           <h2 style={{ fontFamily: display, fontWeight: 600, fontSize: 48, letterSpacing: '-.025em', lineHeight: 1, margin: '0 0 18px' }}>
             Let's connect and bring<br />your ideas to <span className="kc-grad">life.</span>
           </h2>
-          <p style={{ fontFamily: mono, fontSize: 13, color: '#7A7A88', marginBottom: 30, letterSpacing: '.04em' }}>open to ux + product roles â€” full-time, contract & freelance</p>
+          <p style={{ fontFamily: mono, fontSize: 13, color: '#7A7A88', marginBottom: 30, letterSpacing: '.04em' }}>open to ux + product roles — full-time, contract & freelance</p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="mailto:kevin@kcon.design" className="kc-btn kc-btn-p" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: '#FBFBFE', color: '#040407' }}>kevin@kcon.design</a>
-            <a href="https://www.linkedin.com/in/kcon/" target="_blank" rel="noreferrer" className="kc-btn kc-btn-g" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: 'rgba(255,255,255,.05)', color: '#EDEDF2', border: '1px solid rgba(255,255,255,.16)' }}>LinkedIn â†—</a>
+            <a href="https://www.linkedin.com/in/kcon/" target="_blank" rel="noreferrer" className="kc-btn kc-btn-g" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: 'rgba(255,255,255,.05)', color: '#EDEDF2', border: '1px solid rgba(255,255,255,.16)' }}>LinkedIn ↗</a>
           </div>
         </section>
 
         {/* footer */}
         <footer style={{ padding: '24px 36px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: mono, fontSize: 12, color: '#6A6A78', borderTop: '1px solid rgba(255,255,255,.06)' }}>
-          <span>Â© 2026 KEVIN CONNOLLY â€” built with intention</span>
+          <span>© 2026 KEVIN CONNOLLY — built with intention</span>
           <div>
             {[
               { label: 'linkedin', href: 'https://www.linkedin.com/in/kcon/' },
