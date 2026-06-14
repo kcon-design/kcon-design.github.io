@@ -19,25 +19,21 @@
         overflow-x: hidden;
       }
       @keyframes kconLoaderExit {
-        0%, 67% { opacity: 1; }
+        0%, 56% { opacity: 1; }
         100% { opacity: 0; visibility: hidden; }
       }
-      @keyframes kconLoaderBreathe {
-        0%, 100% { transform: scale(0.86); opacity: 0.72; }
-        50% { transform: scale(1.08); opacity: 1; }
-      }
-      @keyframes kconLoaderNova {
-        0%, 50% { transform: scale(0.92); }
-        72% { transform: scale(1.12); opacity: 1; }
-        100% { transform: scale(17); opacity: 0; filter: blur(5px) saturate(0.9); }
+      @keyframes kconOrbBloom {
+        0%, 34% { transform: scale(0.9); opacity: 0.94; }
+        52% { transform: scale(1.06); opacity: 1; }
+        100% { transform: scale(3.9); opacity: 0; filter: blur(8px) saturate(0.9); }
       }
       @keyframes kconLoaderFinish {
         from { opacity: 1; visibility: visible; }
         to { opacity: 0; visibility: hidden; }
       }
-      @keyframes kconLoaderFinishStar {
+      @keyframes kconLoaderFinishOrb {
         from { transform: scale(1); opacity: 1; }
-        to { transform: scale(2.4); opacity: 0; filter: blur(3px) saturate(0.9); }
+        to { transform: scale(2.4); opacity: 0; filter: blur(6px) saturate(0.9); }
       }
       #kcon-mobile-loader {
         position: fixed;
@@ -47,34 +43,34 @@
         place-items: center;
         pointer-events: none;
         background: radial-gradient(circle at 50% 50%, rgba(124, 106, 255, 0.08), transparent 34%), #050507;
-        animation: kconLoaderExit 4.2s cubic-bezier(.2,.8,.2,1) both;
+        animation: kconLoaderExit 2.35s cubic-bezier(.2,.8,.2,1) both;
       }
-      #kcon-mobile-loader-star {
-        position: relative;
-        width: 58px;
-        height: 58px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 45% 46%, #fff 0 8%, #f8f0a6 12%, #ff6eb9 30%, #6ff3c8 52%, rgba(111,243,200,0) 70%);
-        box-shadow: 0 0 22px rgba(255,255,255,0.75), 0 0 58px rgba(255,106,200,0.64), 0 0 92px rgba(111,243,200,0.45);
-        filter: blur(0.2px) saturate(1.12);
-        animation: kconLoaderBreathe 1.55s ease-in-out infinite, kconLoaderNova 4.2s cubic-bezier(.2,.8,.2,1) both;
-      }
-      #kcon-mobile-loader-star::before {
+      #kcon-mobile-loader::after {
         content: "";
         position: absolute;
-        width: 160px;
-        height: 38px;
-        margin: 10px 0 0 -51px;
-        border-radius: 999px;
-        transform: rotate(-18deg);
-        background: linear-gradient(90deg, transparent, rgba(116,255,211,0.42), rgba(255,105,190,0.55), transparent);
-        filter: blur(10px);
+        inset: 0;
+        background: radial-gradient(circle at 50% 50%, rgba(155,124,255,0.18), transparent 34%), radial-gradient(circle at 50% 50%, rgba(111,243,200,0.08), transparent 50%);
+        opacity: 0.75;
+        pointer-events: none;
+      }
+      #kcon-mobile-loader-orb-wrap {
+        position: relative;
+        z-index: 1;
+        width: 230px;
+        height: 230px;
+        filter: blur(0.2px) saturate(1.08);
+        animation: kconOrbBloom 2.35s cubic-bezier(.2,.8,.2,1) both;
+      }
+      #kcon-mobile-loader-orb {
+        width: 100%;
+        height: 100%;
+        display: block;
       }
       #kcon-mobile-loader.is-done {
         animation: kconLoaderFinish 0.55s ease forwards;
       }
-      #kcon-mobile-loader.is-done #kcon-mobile-loader-star {
-        animation: kconLoaderFinishStar 0.55s ease forwards;
+      #kcon-mobile-loader.is-done #kcon-mobile-loader-orb-wrap {
+        animation: kconLoaderFinishOrb 0.55s ease forwards;
       }
       @media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
         #kcon-mobile-loader { display: grid; }
@@ -82,7 +78,60 @@
     </style>
   </head>
   <body>
-    <div id="kcon-mobile-loader" aria-hidden="true"><div id="kcon-mobile-loader-star"></div></div>
+    <div id="kcon-mobile-loader" aria-hidden="true"><div id="kcon-mobile-loader-orb-wrap"><canvas id="kcon-mobile-loader-orb"></canvas></div></div>
+
+    <script>
+      (() => {
+        const canvas = document.getElementById('kcon-mobile-loader-orb');
+        const loader = document.getElementById('kcon-mobile-loader');
+        if (!canvas || !loader || !window.matchMedia('(max-width: 760px)').matches) return;
+        const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false, antialias: true });
+        if (!gl) return;
+
+        const vert = 'attribute vec2 position; varying vec2 vUv; void main(){ vUv = position * 0.5 + 0.5; gl_Position = vec4(position, 0.0, 1.0); }';
+        const frag = `
+          precision highp float;
+          uniform float iTime;
+          uniform vec3 iResolution;
+          varying vec2 vUv;
+          vec3 hash33(vec3 p3){ p3=fract(p3*vec3(0.1031,0.11369,0.13787)); p3+=dot(p3,p3.yxz+19.19); return -1.0+2.0*fract(vec3(p3.x+p3.y,p3.x+p3.z,p3.y+p3.z)*p3.zyx); }
+          float snoise3(vec3 p){ const float K1=.333333333; const float K2=.166666667; vec3 i=floor(p+(p.x+p.y+p.z)*K1); vec3 d0=p-(i-(i.x+i.y+i.z)*K2); vec3 e=step(vec3(0.0),d0-d0.yzx); vec3 i1=e*(1.0-e.zxy); vec3 i2=1.0-e.zxy*(1.0-e); vec3 d1=d0-(i1-K2); vec3 d2=d0-(i2-K1); vec3 d3=d0-.5; vec4 h=max(.6-vec4(dot(d0,d0),dot(d1,d1),dot(d2,d2),dot(d3,d3)),0.0); vec4 n=h*h*h*h*vec4(dot(d0,hash33(i)),dot(d1,hash33(i+i1)),dot(d2,hash33(i+i2)),dot(d3,hash33(i+1.0))); return dot(vec4(31.316),n); }
+          float light1(float i,float a,float d){ return i/(1.0+d*a); }
+          float light2(float i,float a,float d){ return i/(1.0+d*d*a); }
+          vec4 extractAlpha(vec3 c){ float a=max(max(c.r,c.g),c.b); return vec4(c/(a+1e-5),a); }
+          void main(){
+            vec2 center=iResolution.xy*.5; float size=min(iResolution.x,iResolution.y); vec2 uv=(vUv*iResolution.xy-center)/size*2.0;
+            float angle=sin(iTime*.22)*.16; float s=sin(angle); float c=cos(angle); uv=vec2(c*uv.x-s*uv.y,s*uv.x+c*uv.y);
+            vec3 color1=vec3(.611765,.262745,.996078); vec3 color2=vec3(.298039,.760784,.913725); vec3 color3=vec3(.062745,.078431,.6);
+            float innerRadius=.6; float noiseScale=.65; float ang=atan(uv.y,uv.x); float len=length(uv); float invLen=len>0.0?1.0/len:0.0;
+            float n0=snoise3(vec3(uv*noiseScale,iTime*.5))*.5+.5; float r0=mix(mix(innerRadius,1.0,.4),mix(innerRadius,1.0,.6),n0); float d0=distance(uv,(r0*invLen)*uv);
+            float v0=light1(1.0,10.0,d0); v0*=smoothstep(r0*1.05,r0,len); v0*=smoothstep(r0*.8,r0*.95,len);
+            float cl=cos(ang+iTime*2.0)*.5+.5; float a=iTime*-1.0; vec2 pos=vec2(cos(a),sin(a))*r0; float d=distance(uv,pos); float v1=light2(1.5,5.0,d); v1*=light1(1.0,50.0,d0);
+            float v2=smoothstep(1.0,mix(innerRadius,1.0,n0*.5),len); float v3=smoothstep(innerRadius,mix(innerRadius,1.0,.5),len);
+            vec3 colBase=mix(color1,color2,cl); vec3 finalCol=mix(color3,colBase,v0); finalCol=(finalCol+v1)*v2*v3; finalCol=clamp(finalCol,0.0,1.0);
+            vec4 col=extractAlpha(finalCol); gl_FragColor=vec4(col.rgb*col.a,col.a);
+          }
+        `;
+        function makeShader(type, source){ const s=gl.createShader(type); gl.shaderSource(s,source); gl.compileShader(s); return s; }
+        const prog=gl.createProgram();
+        gl.attachShader(prog, makeShader(gl.VERTEX_SHADER, vert));
+        gl.attachShader(prog, makeShader(gl.FRAGMENT_SHADER, frag));
+        gl.linkProgram(prog);
+        const posLoc=gl.getAttribLocation(prog,'position');
+        const timeLoc=gl.getUniformLocation(prog,'iTime');
+        const resLoc=gl.getUniformLocation(prog,'iResolution');
+        const buffer=gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,3,-1,-1,3]), gl.STATIC_DRAW);
+        gl.enableVertexAttribArray(posLoc);
+        gl.vertexAttribPointer(posLoc,2,gl.FLOAT,false,0,0);
+        let raf = 0;
+        function resize(){ const dpr=Math.min(window.devicePixelRatio||1,2); const rect=canvas.getBoundingClientRect(); canvas.width=Math.max(1,Math.floor(rect.width*dpr)); canvas.height=Math.max(1,Math.floor(rect.height*dpr)); gl.viewport(0,0,canvas.width,canvas.height); }
+        function frame(t){ if(!document.body.contains(canvas)) return; resize(); gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT); gl.useProgram(prog); gl.uniform1f(timeLoc,t*.001); gl.uniform3f(resLoc,canvas.width,canvas.height,canvas.width/canvas.height); gl.drawArrays(gl.TRIANGLES,0,3); raf=requestAnimationFrame(frame); }
+        raf=requestAnimationFrame(frame);
+        loader.addEventListener('animationend', () => cancelAnimationFrame(raf), { once: true });
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
