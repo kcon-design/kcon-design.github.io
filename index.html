@@ -31,6 +31,14 @@
         72% { transform: scale(1.12); opacity: 1; }
         100% { transform: scale(17); opacity: 0; filter: blur(5px) saturate(0.9); }
       }
+      @keyframes kconLoaderFinish {
+        from { opacity: 1; visibility: visible; }
+        to { opacity: 0; visibility: hidden; }
+      }
+      @keyframes kconLoaderFinishStar {
+        from { transform: scale(1); opacity: 1; }
+        to { transform: scale(2.4); opacity: 0; filter: blur(3px) saturate(0.9); }
+      }
       #kcon-mobile-loader {
         position: fixed;
         inset: 0;
@@ -61,6 +69,12 @@
         transform: rotate(-18deg);
         background: linear-gradient(90deg, transparent, rgba(116,255,211,0.42), rgba(255,105,190,0.55), transparent);
         filter: blur(10px);
+      }
+      #kcon-mobile-loader.is-done {
+        animation: kconLoaderFinish 0.55s ease forwards;
+      }
+      #kcon-mobile-loader.is-done #kcon-mobile-loader-star {
+        animation: kconLoaderFinishStar 0.55s ease forwards;
       }
       @media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
         #kcon-mobile-loader { display: grid; }
