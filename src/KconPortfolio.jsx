@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useReducer, useState } from 'react';
+import { useEffect, useRef, useReducer, useState } from 'react';
 
 /* ============================================================
    Constellation - drifting white dots + faint links, spanning
