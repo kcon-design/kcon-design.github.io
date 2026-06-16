@@ -1151,14 +1151,14 @@ const work = [
 
 const workOrder = [
   '3D Printing Shop: 900 Sales',
-  'H3 Menu Remake',
   'doTERRA Essential Oils App Redesign',
-  'LA Fitness App Redesign'
+  'LA Fitness App Redesign',
+  'H3 Menu Remake'
 ];
 
 const featuredWork = new Set([
   '3D Printing Shop: 900 Sales',
-  'LA Fitness App Redesign'
+  'H3 Menu Remake'
 ]);
 
 const orderedWork = workOrder
