@@ -1928,12 +1928,9 @@ export default function KconPortfolio() {
           <h1 className="kc-hero-title" style={{ fontFamily: display, fontWeight: 600, fontSize: 76, lineHeight: 1.08, letterSpacing: '-.01em', margin: '0 0 22px', color: '#FBFBFE', textShadow: '0 2px 60px rgba(0,0,0,.7)' }}>
             Part designer<br /><span className="kc-grad">part AI whisperer</span><br />all craft.
           </h1>
-          <p style={{ fontSize: 16, color: '#C2C2CE', maxWidth: 440, margin: '0 auto 16px', lineHeight: 1.6 }}>
+          <p style={{ fontSize: 16, color: '#C2C2CE', maxWidth: 440, margin: '0 auto 34px', lineHeight: 1.6 }}>
             I use AI as a creative material — <b style={{ color: '#FBFBFE', fontWeight: 500 }}>not a crutch.</b>
           </p>
-          <div style={{ fontFamily: mono, fontSize: 13, color: '#A2A2AE', letterSpacing: '.04em', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginBottom: 34 }}>
-            UX + Product <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#4A4A55' }} /> 6+ years
-          </div>
           <div style={{ display: 'flex', gap: 13, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="#contact" className="kc-btn kc-btn-p" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: '#FBFBFE', color: '#040407', letterSpacing: '.02em' }}>get in touch →</a>
             <a href="./Kevin_Connolly_Resume.pdf" target="_blank" rel="noreferrer" className="kc-btn kc-btn-g" style={{ fontFamily: mono, fontSize: 13, fontWeight: 500, padding: '13px 28px', borderRadius: 50, background: 'rgba(255,255,255,.05)', color: '#EDEDF2', border: '1px solid rgba(255,255,255,.16)', letterSpacing: '.02em', backdropFilter: 'blur(8px)' }}>▶ resume.pdf</a>
